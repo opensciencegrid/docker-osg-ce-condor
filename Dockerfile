@@ -5,8 +5,8 @@ FROM opensciencegrid/compute-entrypoint:$IMAGE_BASE_TAG
 
 LABEL maintainer "OSG Software <help@opensciencegrid.org>"
 
-RUN yum install -y --enablerepo=osg-minefield \
-                   --enablerepo=osg-upcoming-minefield \
+RUN yum install -y --enablerepo=osg-testing \
+                   --enablerepo=osg-upcoming-testing \
                    osg-ce-condor && \
     yum clean all && \
     rm -rf /var/cache/yum/
