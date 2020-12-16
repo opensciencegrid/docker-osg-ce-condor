@@ -51,3 +51,5 @@ for attr in COLLECTOR_MAX_FILE_DESCRIPTORS \
 done
 [[ -s /etc/condor/config.d/01-fdfix.conf ]] && \
     echo "# This file was created by $prog" >> /etc/condor/config.d/01-fdfix.conf
+
+chown -R condor:condor /var/log/condor /var/lib/condor/spool
