@@ -51,3 +51,9 @@ for attr in COLLECTOR_MAX_FILE_DESCRIPTORS \
 done
 [[ -s /etc/condor/config.d/01-fdfix.conf ]] && \
     echo "# This file was created by $prog" >> /etc/condor/config.d/01-fdfix.conf
+
+log=$(condor_config_val LOG); ret=$?
+[[ -n $log && $ret == 0 ]] || fail "Couldn't get log directory (value of the LOG config option)"
+spool=$(condor_config_val SPOOL); ret=$?
+[[ -n $spool && $ret == 0 ]] || fail "Couldn't get spool directory (value of the SPOOL config option)"
+chown -R condor:condor "$log" "$spool"
