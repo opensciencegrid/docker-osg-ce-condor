@@ -1,6 +1,8 @@
 #!/bin/bash
 # Adapted from https://github.com/htcondor/htcondor
 
+set -xe
+
 prog=${0##*/}
 
 fail () {
@@ -53,3 +55,5 @@ done
     echo "# This file was created by $prog" >> /etc/condor/config.d/01-fdfix.conf
 
 chown -R condor:condor /var/log/condor /var/lib/condor/spool
+
+set +xe
