@@ -1,7 +1,7 @@
 #!/bin/bash
 # Adapted from https://github.com/htcondor/htcondor
 
-set -xe
+set -x
 
 prog=${0##*/}
 
@@ -43,7 +43,7 @@ for attr in COLLECTOR_MAX_FILE_DESCRIPTORS \
             SHARED_PORT_MAX_FILE_DESCRIPTORS \
             SCHEDD_MAX_FILE_DESCRIPTORS \
             MAX_FILE_DESCRIPTORS; do
-    config_max=$(condor_config_val -evaluate $attr 2>/dev/null)
+    config_max=$(condor_config_val -evaluate $attr)
     if [[ $config_max =~ ^[0-9]+$ && $config_max -gt $hard_max ]]; then
         if ! ulimit -Hn "$config_max" &>/dev/null; then
             add_values_to 01-fdfix.conf "$attr" "$hard_max"
